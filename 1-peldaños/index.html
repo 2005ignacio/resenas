@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reseñas</title>
+<meta name="description" content="Dejanos tu reseña en Google y seguinos en nuestras redes.">
+<meta name="theme-color" content="#E6DFD3"><!-- Se actualiza solo con el color --bg de la ZONA 1 -->
+
+<!--
+  ╔══════════════════════════════════════════════════════════════════╗
+  ║  GUÍA RÁPIDA — ARMAR LA TARJETA PARA UN LOCAL NUEVO              ║
+  ╠══════════════════════════════════════════════════════════════════╣
+  ║  Todo lo que se edita está ARRIBA de este archivo, en 3 zonas.   ║
+  ║  Buscalas con Ctrl+F (o Cmd+F) escribiendo el nombre:            ║
+  ║                                                                  ║
+  ║   ZONA 1 — COLORES Y TIPOGRAFÍA  (dentro de <style>, :root)      ║
+  ║   ZONA 2 — TEXTOS Y LINKS        (dentro de <script>, CONFIG)    ║
+  ║   ZONA 3 — FOTO DE PERFIL        (archivo logo.png + la línea    ║
+  ║                                   logoFile dentro de CONFIG)     ║
+  ║                                                                  ║
+  ║  El contenedor marrón de abajo de todo (tu cartel de Cotiva)     ║
+  ║  se edita en el bloque CREATOR, justo debajo de CONFIG.          ║
+  ║  Ese normalmente NO se toca.                                     ║
+  ║                                                                  ║
+  ║  Todo lo que está debajo de los carteles "NO TOCAR" es el        ║
+  ║  armado de la página y no hace falta modificarlo.                ║
+  ║                                                                  ║
+  ║  AL FINALIZAR: guardá, subí index.html y la foto a GitHub y      ║
+  ║  Netlify publica solo. Esa URL es la que va en el QR y el NFC.   ║
+  ╚══════════════════════════════════════════════════════════════════╝
+-->
+
+<!-- Tipografías de Google Fonts (Instrument Serif para títulos y Manrope para el resto).
+     Si cambiás de tipografía en la ZONA 1, tenés que cambiarla también en este link.
+     Sin internet se ven Georgia y la fuente del sistema. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  /* ================================================================
+     ZONA 1 — COLORES Y TIPOGRAFÍA
+     ================================================================
+     Los colores van en formato HEX (ejemplo: #2B1D14). Para sacar un
+     código: buscá "color picker" en Google, elegí el color y copiá
+     el HEX.
+
+     Cambiando SOLO estas líneas se actualiza toda la página.
+     Al lado de cada color dice exactamente QUÉ cambia.
+     ================================================================ */
+  :root{
+
+    /* ---------- FONDO DE LA PÁGINA ---------- */
+    --bg: #E6DFD3;          /* Fondo general (lo que rodea a la tarjeta).
+                               También pinta la barra del navegador en el celular. */
+    --bg-soft: #F3EEE5;     /* Brillo suave de arriba del fondo. Tiene que ser
+                               parecido a --bg pero un poco más claro. */
+
+    /* ---------- BANDA SUPERIOR Y FOTO DE PERFIL ---------- */
+    --cover: #2B1D14;       /* Banda de color de arriba de la tarjeta (detrás de la foto).
+                               Si querés que NO se note la banda, poné el mismo
+                               color que --paper. */
+    --ring: #C29A4B;        /* Aro fino dorado alrededor del círculo de la foto. */
+    --avatar-bg: #F3ECDD;   /* Fondo del círculo cuando el local NO tiene foto todavía
+                               (se muestra la inicial del nombre). */
+    --avatar-text: #7A4E2D; /* Color de esa letra inicial. */
+
+    /* ---------- TARJETA CENTRAL ---------- */
+    --paper: #FFFDF9;       /* Fondo de la tarjeta y borde alrededor de la foto. */
+    --paper-dim: #E9E0D0;   /* Líneas finas: divisores y bordes de los botones de redes. */
+    --tile-bg: #F7F2E8;     /* Fondo de los botones de Instagram y WhatsApp. */
+    --note-bg: #F7F2E8;     /* Fondo de la cajita de aclaración (la de abajo del eslogan). */
+
+    /* ---------- TEXTOS ---------- */
+    --ink: #2B1D14;         /* COLOR PRINCIPAL: nombre del local, textos importantes y
+                               fondo del botón grande "Ayudanos a crecer". */
+    --ink-soft: #6F6154;    /* Textos secundarios: ubicación, aclaración, línea
+                               "Un minuto tuyo…" y pie de página. */
+    --wood-dark: #7A4E2D;   /* Eslogan en cursiva (la frase debajo del nombre). */
+
+    /* ---------- BOTÓN DE RESEÑA DE GOOGLE ---------- */
+    --gold: #C29A4B;        /* Las 5 estrellas. También el borde que aparece al
+                               navegar con teclado. */
+    --gold-soft: #E3B872;   /* Frase chica dentro del botón oscuro
+                               ("Tu opinión nos ayuda a seguir mejorando."). */
+    --cta-hover: #3D2A1D;   /* Color del botón grande cuando lo tocás o pasás el mouse.
+                               Tiene que ser parecido a --ink. */
+
+    /* ---------- ÍCONOS DE REDES DEL LOCAL ---------- */
+    --ig-icon: #C1447E;     /* Ícono de Instagram. */
+    --wa-icon: #2E9F5C;     /* Ícono de WhatsApp. */
+
+    /* ---------- CARTEL DE COTIVA (contenedor gris de abajo) ----------
+       Es tu firma. Normalmente se deja igual en todas las tarjetas. */
+    --promo-bg: #c9bbbb;    /* Fondo del contenedor gris claro. */
+    --promo-border: #534a3b;/* Borde del contenedor y de sus dos botones. */
+    --promo-text: #2A1A10;  /* Título, texto y letras de los botones. */
+    --promo-btn: #84aab9;   /* Fondo de los dos botones blancos. */
+
+    /* ---------- TIPOGRAFÍAS ----------
+       --font-display: nombre del local, eslogan y letra inicial.
+       --font-body:    todo el resto (botones, textos chicos, cartel).
+       Si cambiás alguna, cambiala también en el <link> de Google Fonts
+       de más arriba, o no se va a cargar. */
+    --font-display: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+    --font-body: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+  /* ================================================================
+     FIN ZONA 1 — de acá para abajo el CSS es el diseño: no se toca.
+     ================================================================ */
+
+
+  /* ===================== NO TOCAR (diseño) ===================== */
+
+  *{ box-sizing: border-box; }
+
+  /* Hace que el atributo "hidden" funcione siempre */
+  [hidden]{ display:none !important; }
+
+  html,body{ margin:0; padding:0; }
+
+  body{
+    font-family: var(--font-body);
+    background: radial-gradient(120% 60% at 50% 0%, var(--bg-soft) 0%, var(--bg) 70%);
+    background-color: var(--bg);
+    color: var(--ink);
+    min-height: 100vh;
+    min-height: 100dvh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding: 28px 16px 56px;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  .wrap{
+    width: 100%;
+    max-width: 420px;
+  }
+
+  /* Íconos (vienen del "sprite" de más abajo) */
+  .ico{ width: 22px; height: 22px; fill: currentColor; flex-shrink: 0; }
+
+  a:focus-visible{ outline: 3px solid var(--gold); outline-offset: 3px; }
+
+  /* ================= TARJETA DEL LOCAL ================= */
+  .profile{
+    background: var(--paper);
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow:
+      0 1px 0 rgba(255,255,255,.7) inset,
+      0 40px 70px -34px color-mix(in srgb, var(--ink) 55%, transparent),
+      0 8px 20px -12px color-mix(in srgb, var(--ink) 25%, transparent);
+  }
+
+  /* Banda superior de color */
+  .cover{
+    height: 116px;
+    background:
+      radial-gradient(rgba(255,255,255,.07) 1px, transparent 1.2px) 0 0 / 7px 7px,
+      linear-gradient(160deg, color-mix(in srgb, var(--cover) 80%, white), var(--cover));
+  }
+
+  .profile-body{ padding: 0 26px 28px; text-align:center; }
+
+  /* Círculo de la foto de perfil */
+  .avatar{
+    position: relative;
+    width: 160px;
+    height: 160px;
+    margin: -80px auto 18px;
+    border-radius: 50%;
+    border: 5px solid var(--paper);
+    background: var(--avatar-bg);
+    box-shadow:
+      0 0 0 1.5px var(--ring),
+      0 18px 30px -14px color-mix(in srgb, var(--ink) 60%, transparent);
+    overflow: hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .avatar img{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit: cover;
+  }
+  .avatar-initial{
+    font-family: var(--font-display);
+    font-size: 64px;
+    line-height: 1;
+    color: var(--avatar-text);
+  }
+
+  /* Nombre, eslogan, aclaración, ubicación */
+  .name{
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(32px, 9.5vw, 40px);
+    line-height: 1.05;
+    letter-spacing: -.01em;
+    margin: 0 0 8px;
+    text-wrap: balance;
+  }
+
+  .tagline{
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 21px;
+    line-height: 1.3;
+    color: var(--wood-dark);
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .note{
+    max-width: 330px;
+    margin: 16px auto 0;
+    padding: 11px 16px;
+    background: var(--note-bg);
+    border: 1px solid var(--paper-dim);
+    border-radius: 14px;
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+
+  .location{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink-soft);
+    margin: 16px 0 0;
+  }
+  .location .ico{ width: 14px; height: 14px; }
+
+  .rule{
+    border: 0;
+    height: 1px;
+    background: var(--paper-dim);
+    margin: 26px 0 24px;
+  }
+
+  /* Estrellas y frase */
+  .stars{
+    display:flex;
+    justify-content:center;
+    gap: 6px;
+    margin-bottom: 12px;
+    color: var(--gold);
+  }
+  .stars .ico{ width: 21px; height: 21px; }
+
+  .card-label{
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    margin: 0 0 18px;
+    line-height: 1.5;
+  }
+
+  /* Botón grande: reseña en Google */
+  .cta{
+    display:flex;
+    align-items:center;
+    gap: 14px;
+    width: 100%;
+    text-align:left;
+    text-decoration:none;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 14px 20px 14px 14px;
+    border-radius: 18px;
+    box-shadow: 0 16px 26px -16px color-mix(in srgb, var(--ink) 80%, transparent);
+    transition: transform .15s ease, background .15s ease;
+  }
+  .cta:hover{ background: var(--cta-hover); }
+  .cta:active{ transform: scale(.985); }
+  .cta-chip{
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+  }
+  .cta-chip .ico{ width: 22px; height: 22px; }
+  .cta-title{
+    display:block;
+    font-weight: 800;
+    font-size: 17px;
+    letter-spacing: -.005em;
+    line-height: 1.2;
+  }
+  .cta-sub{
+    display:block;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 1.4;
+    color: var(--gold-soft);
+    margin-top: 3px;
+  }
+
+  /* Divisor "Seguinos y escribinos" */
+  .divider{
+    display:flex;
+    align-items:center;
+    gap: 12px;
+    margin: 26px 0 16px;
+    color: var(--ink-soft);
+    font-size: 12.5px;
+    font-weight: 500;
+  }
+  .divider::before,
+  .divider::after{
+    content:"";
+    height: 1px;
+    flex:1;
+    background: var(--paper-dim);
+  }
+
+  /* Botones de Instagram y WhatsApp del local */
+  .social-row{ display:flex; gap: 12px; }
+
+  .social-btn{
+    flex:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap: 10px;
+    text-decoration:none;
+    color: var(--ink);
+    background: var(--tile-bg);
+    border: 1px solid var(--paper-dim);
+    border-radius: 16px;
+    padding: 15px 10px;
+    font-size: 14px;
+    font-weight: 700;
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .social-btn:hover{ box-shadow: 0 10px 18px -12px color-mix(in srgb, var(--ink) 60%, transparent); }
+  .social-btn:active{ transform: scale(.97); }
+  .social-btn .ico{ width: 22px; height: 22px; }
+  .social-btn.ig .ico{ color: var(--ig-icon); }
+  .social-btn.wa .ico{ color: var(--wa-icon); }
+
+  /* ================= PIE DE PÁGINA ================= */
+  .footer-note{
+    text-align:center;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--ink-soft);
+    margin: 24px 0 0;
+    line-height: 1.6;
+  }
+
+  /* ================= CARTEL DE COTIVA ================= */
+  .promo{
+    margin-top: 30px;
+    background: var(--promo-bg);
+    color: var(--promo-text);
+    border: 1.5px solid var(--promo-border);
+    border-radius: 18px;
+    padding: 24px 20px 20px;
+  }
+  .promo-title{
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 1.3;
+    margin: 0 0 12px;
+  }
+  .promo-text p{
+    font-size: 14.5px;
+    line-height: 1.65;
+    margin: 0 0 10px;
+  }
+  .promo-text{ margin-bottom: 8px; }
+  .promo-btn{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap: 10px;
+    text-decoration:none;
+    background: var(--promo-btn);
+    color: var(--promo-text);
+    border: 1.5px solid var(--promo-border);
+    border-radius: 14px;
+    padding: 15px 16px;
+    font-size: 15.5px;
+    font-weight: 800;
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .promo-btn + .promo-btn{ margin-top: 12px; }
+  .promo-btn:hover{ box-shadow: 0 6px 0 -2px var(--promo-border); transform: translateY(-2px); }
+  .promo-btn:active{ transform: scale(.98); box-shadow: none; }
+  .promo-btn .ico{ width: 22px; height: 22px; }
+
+  /* Una sola entrada suave al abrir la página */
+  @keyframes rise{ from{ opacity:0; transform: translateY(10px); } to{ opacity:1; transform:none; } }
+  .wrap{ animation: rise .6s ease both; }
+
+  @media (prefers-reduced-motion: reduce){
+    .wrap{ animation: none; }
+    .cta, .social-btn, .promo-btn{ transition: none; }
+  }
+
+  @media (max-width: 360px){
+    .profile-body{ padding: 0 20px 24px; }
+    .avatar{ width: 140px; height: 140px; margin-top: -70px; }
+    .avatar-initial{ font-size: 56px; }
+    .promo-btn{ font-size: 14.5px; }
+  }
+</style>
+
+<script>
+  /* ================================================================
+     ZONA 2 — TEXTOS Y LINKS DEL LOCAL
+     ================================================================
+     Cambiá solamente lo que está entre comillas "...".
+     No toques lo que está antes de los dos puntos (:) porque es el
+     nombre interno de cada dato.
+     ================================================================ */
+  const CONFIG = {
+
+    // NOMBRE DEL LOCAL. Aparece grande debajo de la foto y en la
+    // pestaña del navegador. Si el local no tiene foto, la primera
+    // letra de este nombre se muestra dentro del círculo.
+    businessName: "Peldaños Libros y Juegos",
+
+    // ESLOGAN (frase en cursiva debajo del nombre).
+    // Dejalo "" (comillas vacías) si el local no tiene.
+    tagline: "Tu forma de ser y crecer",
+
+    // ACLARACIÓN (cajita entre el eslogan y la ubicación).
+    // Sirve para avisar algo del local: horarios, un cartel, una
+    // promo, etc. Ejemplos:
+    //    note: "Lunes a sábados de 9 a 13 y de 16 a 20 hs."
+    //    note: "Aceptamos todos los medios de pago."
+    // Si lo dejás "" (vacío), la cajita NO se muestra.
+    note: "",
+
+    // UBICACIÓN (con el ícono de mapa). Dejalo "" si no querés mostrarla.
+    location: "San Jerónimo Norte, Santa Fe",
+
+    // ZONA 3 — FOTO DE PERFIL (el círculo de arriba).
+    // Escribí el nombre EXACTO del archivo de la foto o logo. Tiene que
+    // estar en la misma carpeta que este index.html.
+    //    - Lo ideal es una imagen CUADRADA (ej: 800 x 800 px).
+    //    - Si es .jpg, escribí "logo.jpg". Si es .png, "logo.png".
+    // Si el local todavía no tiene foto, dejalo "" o dejá un nombre que
+    // no exista: el círculo se muestra igual, con la inicial del nombre.
+    logoFile: "1-peldaños.jpg",
+
+    // BOTÓN GRANDE DE GOOGLE
+    // Frase que va arriba (en negrita) y frase chica que va debajo.
+    ctaTitle: "Ayudanos a crecer",
+    ctaSub: "Tu opinión nos ayuda a seguir mejorando.",
+
+    // Frase que va sobre el botón, debajo de las estrellas. Dejalo ""
+    // si no querés que aparezca.
+    cardLabel: "Un minuto tuyo nos ayuda un montón",
+
+    // Título del divisor que va antes de los botones de redes.
+    socialLabel: "Seguinos y escribinos",
+
+    // Texto del pie de página, arriba del cartel de Cotiva. Dejalo "" para ocultarlo.
+    footerNote: "Peldaños · Gracias por ser parte",
+
+    // --- LINKS (pegá la URL completa de cada uno) ---
+
+    // Reseña de Google. Lo ideal es el link corto de Google Perfil
+    // de Negocio ("Pedir reseñas"): https://g.page/r/XXXX/review
+    googleReviewUrl: "https://www.google.com/maps/place/Pelda%C3%B1os/@-31.5648983,-61.0803998,15.25z/data=!4m12!1m2!2m1!1zcGVsZGHDsW9z!3m8!1s0x95b5716941d48e6b:0xa26f58c6baaaa893!8m2!3d-31.555642!4d-61.0745164!9m1!1b1!15sCglwZWxkYcOxb3NaCyIJcGVsZGHDsW9zkgEKYm9va19zdG9yZZoBJENoZERTVWhOTUc5blMwVkpRMEZuU1VONGN6WTJkRzVuUlJBQuABAPoBBQivARAT!16s%2Fg%2F11rv1k18s2",
+
+    // Instagram del local. Si no tiene, dejalo en "" y el botón desaparece.
+    instagramUrl: "https://www.instagram.com/maria_ines_perren?igsi=N2QzOWNrNnJmbjlz",
+
+    // WhatsApp del local. Formato: https://wa.me/549 + código de área + número
+    // (sin 0 ni 15). Si no tiene, dejalo en "" y el botón desaparece.
+    whatsappUrl: "https://wa.me/5493404522848"
+  };
+  /* ================================================================
+     FIN ZONA 2
+     ================================================================ */
+
+
+  /* ================================================================
+     CARTEL DE COTIVA (contenedor marrón de abajo de todo)
+     ================================================================
+     Es tu firma. Dejalo igual en todas las tarjetas que armes.
+     Si algún día querés cambiar el texto o los links, es acá.
+     ================================================================ */
+  const CREATOR = {
+    // Título del cartel
+    title: "¿Te gustó esta tarjeta para tu local?",
+
+    // Párrafos del cartel. Cada línea entre comillas es un párrafo.
+    // Podés agregar o borrar líneas (separadas por coma).
+    paragraphs: [
+      "Todo en un solo lugar.",
+      "Una tarjeta digital para que tus clientes puedan dejar su reseña, seguirte y contactarte fácilmente.",
+      "QR + NFC · Personalizada para tu negocio"
+    ],
+
+    // Botón 1: abre el mensaje directo (chat) de Instagram de Cotiva
+    primaryLabel: "Escribinos para pedir la tuya",
+    primaryUrl: "https://ig.me/m/cotiva.ar",
+
+    // Botón 2: abre el perfil de Instagram de Cotiva
+    secondaryLabel: "Seguinos en Instagram",
+    secondaryUrl: "https://www.instagram.com/cotiva.ar"
+  };
+  /* ================================================================ */
+</script>
+</head>
+
+<body>
+
+  <!-- ===================== NO TOCAR (armado de la página) =====================
+       Íconos: se definen una sola vez acá y se reutilizan en toda la página.
+       Esto mantiene el archivo liviano. -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="i-ig" viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.2.06 2 .25 2.5.42.6.24 1.1.55 1.6 1.05.5.5.8.95 1.05 1.6.18.5.36 1.3.42 2.5.07 1.3.07 1.7.07 4.9s0 3.6-.07 4.9c-.06 1.2-.25 2-.42 2.5-.24.6-.55 1.1-1.05 1.6-.5.5-.95.8-1.6 1.05-.5.18-1.3.36-2.5.42-1.3.07-1.7.07-4.9.07s-3.6 0-4.9-.07c-1.2-.06-2-.25-2.5-.42-.6-.24-1.1-.55-1.6-1.05-.5-.5-.8-.95-1.05-1.6-.18-.5-.36-1.3-.42-2.5C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.9c.06-1.2.25-2 .42-2.5.24-.6.55-1.1 1.05-1.6.5-.5.95-.8 1.6-1.05.5-.18 1.3-.36 2.5-.42C8.4 2.2 8.8 2.2 12 2.2zm0 1.98c-3.15 0-3.52 0-4.76.07-1.02.05-1.58.22-1.95.36-.49.19-.84.42-1.2.79-.37.36-.6.71-.79 1.2-.14.37-.31.93-.36 1.95C3.2 8.48 3.2 8.85 3.2 12s0 3.52.07 4.76c.05 1.02.22 1.58.36 1.95.19.49.42.84.79 1.2.36.37.71.6 1.2.79.37.14.93.31 1.95.36 1.24.06 1.61.07 4.76.07s3.52 0 4.76-.07c1.02-.05 1.58-.22 1.95-.36.49-.19.84-.42 1.2-.79.37-.36.6-.71.79-1.2.14-.37.31-.93.36-1.95.06-1.24.07-1.61.07-4.76s0-3.52-.07-4.76c-.05-1.02-.22-1.58-.36-1.95a3.2 3.2 0 00-.79-1.2 3.2 3.2 0 00-1.2-.79c-.37-.14-.93-.31-1.95-.36-1.24-.06-1.61-.07-4.76-.07zM12 7.1a4.9 4.9 0 110 9.8 4.9 4.9 0 010-9.8zm0 1.98a2.92 2.92 0 100 5.84 2.92 2.92 0 000-5.84zm5.1-2.15a1.14 1.14 0 110 2.28 1.14 1.14 0 010-2.28z"/></symbol>
+    <symbol id="i-wa" viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.15-1.75-.86-2-.96-.28-.1-.48-.15-.68.15-.2.3-.78.96-.96 1.16-.18.2-.35.22-.65.08-.3-.15-1.28-.47-2.43-1.5-.9-.8-1.5-1.79-1.68-2.09-.18-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.38-.02-.53-.08-.15-.68-1.65-.94-2.26-.24-.6-.5-.5-.68-.5-.18-.02-.38-.02-.58-.02-.2 0-.53.08-.8.38-.28.3-1.05 1.03-1.05 2.5s1.08 2.9 1.23 3.1c.15.2 2.13 3.25 5.16 4.56.72.31 1.28.5 1.72.64.72.23 1.38.2 1.9.12.58-.09 1.75-.72 2-1.4.24-.68.24-1.27.17-1.4-.08-.13-.28-.2-.58-.35zM12.02 2.5a9.5 9.5 0 00-8.13 14.4L2.5 21.5l4.7-1.34a9.5 9.5 0 104.82-17.66zm0 17.28a7.76 7.76 0 01-3.96-1.08l-.28-.17-2.79.8.8-2.71-.19-.28a7.78 7.78 0 1114.05-4.61 7.75 7.75 0 01-7.63 6.05z"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 2C7.6 2 4 5.6 4 10c0 6 8 12 8 12s8-6 8-12c0-4.4-3.6-8-8-8zm0 10.8a2.8 2.8 0 110-5.6 2.8 2.8 0 010 5.6z"/></symbol>
+    <symbol id="i-star" viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.1L4.6 18l1.3-6L1.3 7.7l6.1-.6L10 1.5z"/></symbol>
+    <symbol id="i-google" viewBox="0 0 48 48">
+      <path fill="#FFC107" d="M43.6 20.5h-1.9V20.4H24v7.2h11.3c-1.6 4.6-6 7.9-11.3 7.9-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.1 8 3l5.1-5.1C33.6 6.1 29 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.2-.1-2.4-.4-3.5z"/>
+      <path fill="#FF3D00" d="M6.3 14.7l5.9 4.3C13.8 15.6 18.5 12.5 24 12.5c3.1 0 5.8 1.1 8 3l5.1-5.1C33.6 6.1 29 4 24 4c-7.4 0-13.7 4.2-17.7 10.7z"/>
+      <path fill="#4CAF50" d="M24 44c5.1 0 9.5-1.7 12.9-4.6l-6-5c-2 1.4-4.5 2.2-7 2.2-5.3 0-9.7-3.3-11.3-7.9l-6 4.6C9.6 39.6 16.2 44 24 44z"/>
+      <path fill="#1976D2" d="M43.6 20.5H24v7.2h11.3c-.8 2.3-2.2 4.2-4.1 5.6l6 5C40.5 35.1 44 30 44 24c0-1.2-.1-2.4-.4-3.5z"/>
+    </symbol>
+  </svg>
+
+  <main class="wrap">
+
+    <!-- TARJETA DEL LOCAL: banda + foto + nombre + eslogan + aclaración + ubicación
+         + estrellas + botón de Google + redes.
+         Todos los textos se cambian en ZONA 2 (CONFIG), no acá. -->
+    <section class="profile">
+
+      <div class="cover" aria-hidden="true"></div>
+
+      <div class="profile-body">
+
+        <!-- FOTO DE PERFIL (círculo). La imagen se define en CONFIG.logoFile.
+             Si no hay imagen, se muestra la inicial del nombre. -->
+        <div class="avatar">
+          <span class="avatar-initial" id="avatarInitial" aria-hidden="true"></span>
+          <img id="logoImg" alt="" hidden>
+        </div>
+
+        <h1 class="name" id="businessName"></h1>
+        <p class="tagline" id="tagline"></p>
+
+        <!-- CAJITA DE ACLARACIÓN: se llena desde CONFIG.note.
+             Si está vacía, no se muestra. -->
+        <div class="note" id="note" hidden></div>
+
+        <p class="location" id="location">
+          <svg class="ico" aria-hidden="true"><use href="#i-pin"/></svg>
+          <span id="locationText"></span>
+        </p>
+
+        <hr class="rule">
+
+        <div class="stars" aria-hidden="true">
+          <svg class="ico"><use href="#i-star"/></svg>
+          <svg class="ico"><use href="#i-star"/></svg>
+          <svg class="ico"><use href="#i-star"/></svg>
+          <svg class="ico"><use href="#i-star"/></svg>
+          <svg class="ico"><use href="#i-star"/></svg>
+        </div>
+
+        <p class="card-label" id="cardLabel"></p>
+
+        <a class="cta" id="googleBtn" href="#" target="_blank" rel="noopener noreferrer">
+          <span class="cta-chip" aria-hidden="true">
+            <svg class="ico"><use href="#i-google"/></svg>
+          </span>
+          <span>
+            <span class="cta-title" id="ctaTitle"></span>
+            <span class="cta-sub" id="ctaSub"></span>
+          </span>
+        </a>
+
+        <div class="divider" id="divider"></div>
+
+        <div class="social-row" id="socialRow">
+          <a class="social-btn ig" id="igBtn" href="#" target="_blank" rel="noopener noreferrer">
+            <svg class="ico" aria-hidden="true"><use href="#i-ig"/></svg>
+            <span>Instagram</span>
+          </a>
+          <a class="social-btn wa" id="waBtn" href="#" target="_blank" rel="noopener noreferrer">
+            <svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg>
+            <span>WhatsApp</span>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <p class="footer-note" id="footerNote"></p>
+
+    <!-- CARTEL DE COTIVA: textos y links en el bloque CREATOR (arriba) -->
+    <aside class="promo">
+      <h2 class="promo-title" id="promoTitle"></h2>
+      <div class="promo-text" id="promoText"></div>
+      <a class="promo-btn" id="promoPrimary" href="#" target="_blank" rel="noopener noreferrer">
+        <svg class="ico" aria-hidden="true"><use href="#i-ig"/></svg>
+        <span id="promoPrimaryLabel"></span>
+      </a>
+      <a class="promo-btn" id="promoSecondary" href="#" target="_blank" rel="noopener noreferrer">
+        <svg class="ico" aria-hidden="true"><use href="#i-ig"/></svg>
+        <span id="promoSecondaryLabel"></span>
+      </a>
+    </aside>
+
+  </main>
+
+<script>
+  /* ===================== NO TOCAR (arma la página con lo de arriba) ===================== */
+  (function () {
+    const $ = (id) => document.getElementById(id);
+    const clean = (v) => (v || "").trim();
+
+    // La barra del navegador en el celular toma el color de fondo elegido en ZONA 1
+    const bg = getComputedStyle(document.documentElement).getPropertyValue("--bg").trim();
+    if (bg) document.querySelector('meta[name="theme-color"]').setAttribute("content", bg);
+
+    // Título de la pestaña
+    document.title = clean(CONFIG.businessName) + " — Dejanos tu opinión";
+
+    // Nombre, eslogan, ubicación, textos del botón y pie
+    function setText(id, value) {
+      const el = $(id);
+      const v = clean(value);
+      el.textContent = v;
+      el.hidden = !v;
+    }
+    setText("businessName", CONFIG.businessName);
+    setText("tagline", CONFIG.tagline);
+    setText("note", CONFIG.note);            // cajita de aclaración (se oculta si está vacía)
+    setText("cardLabel", CONFIG.cardLabel);
+    setText("ctaTitle", CONFIG.ctaTitle);
+    setText("ctaSub", CONFIG.ctaSub);
+    setText("footerNote", CONFIG.footerNote);
+
+    if (clean(CONFIG.location)) {
+      $("locationText").textContent = clean(CONFIG.location);
+    } else {
+      $("location").hidden = true;
+    }
+
+    // Foto de perfil: si la imagen no existe, queda la inicial del nombre
+    $("avatarInitial").textContent = clean(CONFIG.businessName).charAt(0).toUpperCase();
+    if (clean(CONFIG.logoFile)) {
+      const img = $("logoImg");
+      img.alt = "Foto de perfil de " + clean(CONFIG.businessName);
+      img.onload = function () { img.hidden = false; };
+      img.onerror = function () { img.hidden = true; };
+      img.src = clean(CONFIG.logoFile);
+    }
+
+    // Botón de Google
+    $("googleBtn").href = CONFIG.googleReviewUrl;
+
+    // Redes del local: si falta el link, el botón se oculta solo
+    function wire(id, url) {
+      const el = $(id);
+      if (clean(url)) { el.href = url; } else { el.hidden = true; }
+    }
+    wire("igBtn", CONFIG.instagramUrl);
+    wire("waBtn", CONFIG.whatsappUrl);
+
+    const anySocial = clean(CONFIG.instagramUrl) || clean(CONFIG.whatsappUrl);
+    if (anySocial && clean(CONFIG.socialLabel)) {
+      $("divider").textContent = clean(CONFIG.socialLabel);
+    } else {
+      $("divider").hidden = true;
+    }
+    if (!anySocial) $("socialRow").hidden = true;
+
+    // Cartel de Cotiva
+    $("promoTitle").textContent = CREATOR.title;
+    CREATOR.paragraphs.forEach(function (t) {
+      const p = document.createElement("p");
+      p.textContent = t;
+      $("promoText").appendChild(p);
+    });
+    $("promoPrimary").href = CREATOR.primaryUrl;
+    $("promoPrimaryLabel").textContent = CREATOR.primaryLabel;
+    $("promoSecondary").href = CREATOR.secondaryUrl;
+    $("promoSecondaryLabel").textContent = CREATOR.secondaryLabel;
+  })();
+</script>
+
+</body>
+</html>
